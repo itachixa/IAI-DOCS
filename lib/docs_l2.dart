@@ -55,7 +55,7 @@ class SemesterL2Screen extends StatelessWidget {
   ];
 
   final List<Map<String, String>> devoirsS4 = const [
-   {'name': 'Anglais_sientifique', 'path': 'assets/pdfs/Anglais/document.pdf'},
+    {'name': 'Anglais_sientifique', 'path': 'assets/pdfs/Anglais/document.pdf'},
     {'name': 'Français', 'path': 'assets/pdfs/Algorithme/document.pdf'},
     {'name': 'Rédaction_sientifique', 'path': 'assets/pdfs/Analyse_Math/document.pdf'},
     {'name': 'ATO II', 'path': 'assets/pdfs/ATO/document.pdf'},
@@ -150,7 +150,14 @@ class PdfViewerPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('PDF Viewer'),
       ),
-      body: SfPdfViewer.file(file),
+      body: GestureDetector(
+        onHorizontalDragUpdate: (details) {
+          if (details.primaryDelta! > 0) {
+            Navigator.pop(context);
+          }
+        },
+        child: SfPdfViewer.file(file),
+      ),
     );
   }
 }
